@@ -1,0 +1,216 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PRG301_Challenge1
+{
+    class Program
+    {
+
+        List<int> items = new List<int>();
+
+        int[] diceNUmbers = { 1, 2, 3, 4, 5, 6 };
+        int loopCounter = 0;
+        int loopCounter2 = 0;
+
+        void roll()
+        {
+            while (loopCounter < 1)
+            {
+
+                string rollInput = Console.ReadLine();
+
+                Random random = new Random();
+                int start2 = random.Next(0, diceNUmbers.Length);
+
+                if (rollInput == "roll")
+                {
+                    Console.WriteLine();
+
+                    Console.WriteLine(diceNUmbers[start2]);
+
+                    Console.WriteLine();
+                    Console.WriteLine("Roll again? If so type yes, if not no.");
+                    Console.WriteLine();
+
+                    loopCounter++;
+
+                    items.Add(diceNUmbers[start2]);
+
+                    yesNo();
+
+
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please type 'roll'.");
+                    Console.WriteLine();
+                    loopCounter = 0;
+                    roll();
+                }
+            }
+
+            void yesNo()
+            {
+                string yesNoInput = Console.ReadLine();
+
+                if (yesNoInput == "yes")
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Type 'roll' to roll dice.");
+                    Console.WriteLine();
+                    loopCounter = 0;
+                    roll();
+                }
+                else if (yesNoInput == "no")
+                {
+                    Console.WriteLine();
+                    items.ForEach(Console.WriteLine);
+                    Console.WriteLine();
+                    Console.WriteLine("How many numbers do you want to examine?");
+                }
+            }
+        }
+
+         static void Main(string[] args)
+        {
+            //List<int> items = new List<int>();
+
+            //int[] diceNUmbers = { 1, 2, 3, 4, 5, 6 };
+
+            Console.Write("Type 'roll' to roll dice.");
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //int loopCounter = 0;
+            //int loopCounter2 = 0;
+
+            //void roll()
+            //{
+            //    while (loopCounter < 1)
+            //    {
+
+            //        string rollInput = Console.ReadLine();
+
+            //        Random random = new Random();
+            //        int start2 = random.Next(0, diceNUmbers.Length);
+
+            //        if (rollInput == "roll")
+            //        {
+            //            Console.WriteLine();
+
+            //            Console.WriteLine(diceNUmbers[start2]);
+
+            //            Console.WriteLine();
+            //            Console.WriteLine("Roll again? If so type yes, if not no.");
+            //            Console.WriteLine();
+
+            //            loopCounter++;
+
+            //            items.Add(diceNUmbers[start2]);
+
+
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine();
+            //            Console.WriteLine("Please type 'roll'.");
+            //            Console.WriteLine();
+            //            loopCounter = 0;
+            //            roll();
+            //        }
+
+
+            //string yesNoInput = Console.ReadLine();
+
+            //if (yesNoInput == "yes")
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine("Type 'roll' to roll dice.");
+            //    Console.WriteLine();
+            //    loopCounter = 0;
+            //}
+            //else if (yesNoInput == "no")
+            //{
+            //    Console.WriteLine();
+            //    items.ForEach(Console.WriteLine);
+            //    Console.WriteLine();
+            //    Console.WriteLine("How many numbers do you want to examine?");
+            //}
+
+
+            Program p = new Program();
+                p.roll();
+
+
+                //string yesNoInput = Console.ReadLine();
+
+                //if (yesNoInput == "yes")
+                //{
+                //    Console.WriteLine();
+                //    Console.WriteLine("Type 'roll' to roll dice.");
+                //    Console.WriteLine();
+                //    p.loopCounter = 0;
+                //    p.roll();
+                //}
+                //else if (yesNoInput == "no")
+                //{
+                //    Console.WriteLine();
+                //    p.items.ForEach(Console.WriteLine);
+                //    Console.WriteLine();
+                //    Console.WriteLine("How many numbers do you want to examine?");
+                //}
+
+                Console.WriteLine();
+                string examineAmount = Console.ReadLine();
+                int userExamine = int.Parse(examineAmount);
+                p.items.RemoveRange(userExamine, p.items.Count - userExamine);
+
+
+                while (p.loopCounter2 < 1)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Filter: list, average or Total?");
+                    Console.WriteLine();
+                    string filterInput = Console.ReadLine();
+                    if (filterInput == "average")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine(p.items.Average());
+                    }
+                    else if (filterInput == "total")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine(p.items.Sum());
+                    }
+
+                    else if (filterInput == "list")
+                    {
+                        Console.WriteLine();
+                        p.items.ForEach(Console.WriteLine);
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine("Filter again?");
+                    Console.WriteLine();
+                    string yesNoInput2 = Console.ReadLine();
+                    if (yesNoInput2 == "yes")
+                    {
+                        p.loopCounter2 = 0;
+                    }
+                    if (yesNoInput2 == "no")
+                    {
+                     p.loopCounter2++;
+                    }
+                }
+
+            Console.WriteLine();
+            Console.WriteLine("Finished.");
+
+                Console.ReadKey();
+            }
+        }
+    }
+
